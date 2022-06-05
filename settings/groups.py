@@ -9,7 +9,7 @@ from .keys import mod, keys
 # Icons: 
 
 
-groups = [Group(i) for i in ["1", "2", "3", "4", "5"]]
+groups = [Group(i) for i in ["", "", "", "", ""]]
 
 for i, group in enumerate(groups):
     actual_key = str(i + 1)

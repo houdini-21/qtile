@@ -2,7 +2,10 @@
 
 from libqtile.config import Key
 from libqtile.command import lazy
+from os import path
 
+
+home = path.expanduser('~')
 
 mod = "mod4"
 
@@ -42,9 +45,6 @@ keys = [Key(key[0], key[1], *key[2:]) for key in [
     ([mod, "control"], "r", lazy.reload_config()),
     #([mod, "control"], "q", lazy.shutdown()),
     #([mod], "r", lazy.spawncmd()),
-
-    # Menu
-    ([mod], "m", lazy.spawn("rofi -show drun")),
 
     # File Manager
     ([mod], "f", lazy.spawn("nautilus")),
@@ -86,6 +86,12 @@ keys = [Key(key[0], key[1], *key[2:]) for key in [
     (["control"], "3", lazy.spawn(
         "pactl set-sink-volume @DEFAULT_SINK@ +5%"
     )),
+    
+    #take screenshot
+    (["control"], "p", lazy.spawn(
+        "xfce4-screenshooter"
+    )),
+
     # brightness
     ([], "XF86MonBrightnessUp", lazy.spawn("brightnessctl set +10%")),
     ([], "XF86MonBrightnessDown", lazy.spawn("brightnessctl set 10%-")),
@@ -110,5 +116,34 @@ keys = [Key(key[0], key[1], *key[2:]) for key in [
 
     ([mod, "shift"], "0", lazy.spawn("playerctl next")),
 
+    # open menu shutdown, restart, lock
+    ([mod], "Escape",
+        lazy.spawn([home + '/.config/rofi/applets/menu/powermenu.sh'])
+     ),
 
+    # open settins network
+    ([mod, "shift"], "n",
+        lazy.spawn([home + '/.config/rofi/applets/menu/network.sh'])
+     ),
+    # screenshot menu
+    ([mod, "shift"], "s",
+        lazy.spawn([home + '/.config/rofi/applets/menu/screenshot.sh'])
+     ),
+
+    # Menu
+    ([mod], "m", lazy.spawn("rofi -show drun")),
+
+    # Volume menu
+    ([mod, "shift"], "v",
+        lazy.spawn([home + '/.config/rofi/applets/menu/volume.sh'])
+     ),
+
+    # Volume menu
+    ([mod, "shift"], "b",
+        lazy.spawn([home + '/.config/rofi/applets/menu/backlight.sh'])
+     ),
+    # Custom menu play
+    ([mod, "shift"], "p",
+        lazy.spawn([home + '/.config/rofi/applets/menu/music.sh'])
+     ),
 ]]
